@@ -4,7 +4,7 @@ import 'package:advanced_flutter/domain/models/models.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class Repository {
-Either<Failure,Authentication> login(LoginRequest loginRequest) ;
+Future<Either<Failure,Authentication>> login(LoginRequest loginRequest) ;
 
  
 }

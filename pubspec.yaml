@@ -44,7 +44,8 @@ dev_dependencies:
   json_annotation: ^4.8.1
   dio: ^5.4.0
   json_serializable: ^6.1.4
-  
+  internet_connection_checker: ^1.0.0+1
+
   
   flutter_lints: ^2.0.0
   flutter_svg: ^2.0.9
