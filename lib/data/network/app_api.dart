@@ -7,7 +7,6 @@ import 'package:retrofit/http.dart';
  
 
 part 'app_api.g.dart';
-//Constants.baseUrl
 @RestApi(baseUrl:"https://m6r7g.wiremockapi.cloud/" )
 //@RestApi(baseUrl: Constant.baseUrl)
 abstract class AppServiceClient {

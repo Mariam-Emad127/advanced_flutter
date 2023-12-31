@@ -5,17 +5,14 @@ import 'package:advanced_flutter/domain/repository/repository.dart';
 import 'package:advanced_flutter/domain/usecase/base_usecase.dart';
 import 'package:dartz/dartz.dart';
 
-class LoginUseCase implements BaseUseCase<LoginUseCaseInput,Authentication> {
-
-final Repository _repository;
-LoginUseCase(this._repository);
+class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
+  final Repository _repository;
+  LoginUseCase(this._repository);
+ 
   @override
-  Future<Either<Failure, Authentication>> excute(LoginUseCaseInput input) async{
-return await _repository.login( LoginRequest(input.email, input.password));
-
+  Future<Either<Failure, Authentication>> excute(LoginUseCaseInput input  ) async {
+    return await _repository.login(LoginRequest(input.email, input.password));
   }
-   
-   
 }
 
 class LoginUseCaseInput {
@@ -23,4 +20,4 @@ class LoginUseCaseInput {
   String password;
 
   LoginUseCaseInput(this.email, this.password);
-} 
+}
