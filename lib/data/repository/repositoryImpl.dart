@@ -8,7 +8,7 @@ import 'package:advanced_flutter/domain/models/models.dart';
 import 'package:advanced_flutter/domain/repository/repository.dart';
 import 'package:dartz/dartz.dart';
 
-abstract class RepositoryImpl implements Repository  {
+  class RepositoryImpl implements Repository  {
   RemoteDataSource remoteDataSource;
   NetworkInfo networkInfo;
   RepositoryImpl(this.remoteDataSource, this.networkInfo);

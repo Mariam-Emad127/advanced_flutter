@@ -14,8 +14,8 @@ class LoginViewModel
       StreamController<void>.broadcast();
   var loginObject = LoginObject("userName", "password");
 
- 
-LoginViewModel();
+  LoginUseCase _loginUseCase; 
+  LoginViewModel(this._loginUseCase);
   @override
   void dispose() {
     _passwordstreamController.close();
@@ -31,12 +31,12 @@ LoginViewModel();
   Sink get inputPassword => _passwordstreamController.sink;
 
   @override
-  Sink get inputUserName =>  _userNamestreamController.sink;
+  Sink get inputUserName => _userNamestreamController.sink;
 
   @override
   login() async {
     //(
-      /* await loginUseCase.excute(
+    /* await loginUseCase.excute(
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold((failure) => {print(failure.message)}, (data) {
       print(data.customer!.name);
@@ -58,7 +58,6 @@ LoginViewModel();
   bool _isUserNameValid(String username) {
     return username.isNotEmpty;
   }
-
 
   @override
   setPassword(String password) {
