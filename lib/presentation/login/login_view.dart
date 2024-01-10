@@ -1,5 +1,6 @@
 import 'package:advanced_flutter/app/di.dart';
 import 'package:advanced_flutter/domain/usecase/login_usecase.dart';
+import 'package:advanced_flutter/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:advanced_flutter/presentation/login/login_viewmodel.dart';
 import 'package:advanced_flutter/presentation/resources/assets_manager.dart';
 import 'package:advanced_flutter/presentation/resources/color_manager.dart';
@@ -16,9 +17,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
-  final LoginViewModel loginViewModel = instance<LoginViewModel>();
-  final TextEditingController _userNameController = TextEditingController();
+  LoginViewModel loginViewModel = instance<LoginViewModel>();
+   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -41,7 +41,16 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.white,
-      body: _getContentWidget(),
+      //_getContentWidget(),
+      body: StreamBuilder<FlowState>(stream: loginViewModel.outputState,
+      builder: (context, snapshot){
+        return snapshot.data?.getScreenWidget(
+        context,_getContentWidget(),(){loginViewModel.login();})??_getContentWidget();
+      
+      }
+
+      )
+      
     );
   }
 
@@ -130,14 +139,14 @@ class _LoginViewState extends State<LoginView> {
                                 context, Routes.forgotPasswordRoute);
                           },
                           child: Text(AppStrings.forgetPassword,
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.titleMedium),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.registerRoute);
                           },
                           child: Text(AppStrings.registerText,
-                              style: Theme.of(context).textTheme.subtitle2),
+                              style: Theme.of(context).textTheme.titleMedium),
                         )
                       ],
                     ),

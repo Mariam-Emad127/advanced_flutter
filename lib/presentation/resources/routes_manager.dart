@@ -29,7 +29,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ForgetPassword());
 
       case Routes.loginRoute:
-      initLoginAppModule();
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBordingView());
@@ -46,18 +46,11 @@ class RouteGenerator {
   }
 }
 
-Route <dynamic>unDefinedRoute(){
-return MaterialPageRoute(builder: (_)=>   Scaffold(
-              appBar: AppBar(
-                title: Text(AppStrings.noRouteFound),
-              ),
-              body: Center(child: Text(AppStrings.noRouteFound))
-              )
-              
-              
-              
-              );
-            
-
-
+Route<dynamic> unDefinedRoute() {
+  return MaterialPageRoute(
+      builder: (_) => Scaffold(
+          appBar: AppBar(
+            title: Text(AppStrings.noRouteFound),
+          ),
+          body: Center(child: Text(AppStrings.noRouteFound))));
 }

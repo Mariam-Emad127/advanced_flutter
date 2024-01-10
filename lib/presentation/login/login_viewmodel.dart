@@ -1,30 +1,34 @@
-import 'dart:async';
+ import 'dart:async';
 import 'package:advanced_flutter/data/network/failure.dart';
 import 'package:advanced_flutter/domain/usecase/login_usecase.dart';
 import 'package:advanced_flutter/presentation/base/baseviewmodel.dart';
 import 'package:advanced_flutter/presentation/common/freezed_data_classes.dart';
+import 'package:advanced_flutter/presentation/common/state_renderer/state_render_impl.dart';
+import 'package:advanced_flutter/presentation/common/state_renderer/state_renderer.dart';
 
 class LoginViewModel
-    implements BaseViewModel, LoginViewModelInput, LoginViewModelOutput {
+    extends BaseViewModel implements LoginViewModelInput, LoginViewModelOutput {
   StreamController _userNamestreamController =
       StreamController<String>.broadcast();
   StreamController _passwordstreamController =
       StreamController<String>.broadcast();
   StreamController _areAllInputsValidStreamController =
       StreamController<void>.broadcast();
-  var loginObject = LoginObject("userName", "password");
+  var loginObject = LoginObject("", "");
 
   LoginUseCase _loginUseCase; 
   LoginViewModel(this._loginUseCase);
   @override
   void dispose() {
+  // super.dispose();
     _passwordstreamController.close();
     _userNamestreamController.close();
+    _areAllInputsValidStreamController.close();
   }
 
   @override
   void start() {
-    // TODO: implement start
+     inputState.add(ContentState());
   }
 
   @override
@@ -35,12 +39,16 @@ class LoginViewModel
 
   @override
   login() async {
-    //(
-    /* await loginUseCase.excute(
+    inputState.add(LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
+    (
+     await _loginUseCase.excute(
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
-        .fold((failure) => {print(failure.message)}, (data) {
+        .fold((failure) => {
+          inputState.add(ErrorState(stateRendererType: StateRendererType.POPUP_ERROR_STATE, message: failure.message)),
+          print(failure.message)}, (data) {
+            inputState.add(ContentState);
       print(data.customer!.name);
-    }); */
+    }); 
   }
 
   @override
@@ -100,17 +108,3 @@ abstract class LoginViewModelOutput {
   Stream<bool> get outputIsPasswordValid;
   Stream<bool> get outputIsAllInputsValid;
 }
-
-/*   Stream<String> get outputIsUserNameValid => _passwordstreamController.stream.map((password) => _isPasswordValid(password));
-
-String _isPasswordValid2(String password){
-
-if(password.isNotEmpty){
-
-  return "";
-}else{
-
-  return "please enter y password";
-}
- */
-//}
