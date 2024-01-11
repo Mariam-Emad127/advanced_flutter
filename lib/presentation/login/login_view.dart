@@ -1,3 +1,4 @@
+import 'package:advanced_flutter/app/app_prefs.dart';
 import 'package:advanced_flutter/app/di.dart';
 import 'package:advanced_flutter/domain/usecase/login_usecase.dart';
 import 'package:advanced_flutter/presentation/common/state_renderer/state_render_impl.dart';
@@ -8,6 +9,7 @@ import 'package:advanced_flutter/presentation/resources/routes_manager.dart';
 import 'package:advanced_flutter/presentation/resources/strings_manager.dart';
 import 'package:advanced_flutter/presentation/resources/values_manger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -18,9 +20,10 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   LoginViewModel loginViewModel = instance<LoginViewModel>();
-   final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+ final AppPreferences _appPreferences=instance<AppPreferences>();
 
   _bind() {
     loginViewModel.start();
@@ -28,6 +31,16 @@ class _LoginViewState extends State<LoginView> {
         () => loginViewModel.setUserName(_userNameController.text));
     _passwordController.addListener(() {
       loginViewModel.setPassword(_passwordController.text);
+
+      loginViewModel.isUserLoggedInSuccessfullyStreamController.stream
+          .listen((isLogIn) {
+        if (isLogIn == true) {
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+_appPreferences.setIsUserLoggedIn();
+            Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+          });
+        }
+      });
     });
   }
 
@@ -40,18 +53,17 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.white,
-      //_getContentWidget(),
-      body: StreamBuilder<FlowState>(stream: loginViewModel.outputState,
-      builder: (context, snapshot){
-        return snapshot.data?.getScreenWidget(
-        context,_getContentWidget(),(){loginViewModel.login();})??_getContentWidget();
-      
-      }
-
-      )
-      
-    );
+        backgroundColor: ColorManager.white,
+        //_getContentWidget(),
+        body: StreamBuilder<FlowState>(
+            stream: loginViewModel.outputState,
+            builder: (context, snapshot) {
+              return snapshot.data
+                      ?.getScreenWidget(context, _getContentWidget(), () {
+                    loginViewModel.login();
+                  }) ??
+                  _getContentWidget();
+            }));
   }
 
   Widget _getContentWidget() {

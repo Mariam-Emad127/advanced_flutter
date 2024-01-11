@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:advanced_flutter/app/app_prefs.dart';
+import 'package:advanced_flutter/app/di.dart';
 import 'package:advanced_flutter/presentation/resources/assets_manager.dart';
 import 'package:advanced_flutter/presentation/resources/color_manager.dart';
 import 'package:advanced_flutter/presentation/resources/routes_manager.dart';
@@ -13,35 +14,55 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-Timer? timer;
+  Timer? timer;
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
-_startDelay(){
+  _startDelay() {
+    timer = Timer(Duration(seconds: 1), _getNext);
+  }
 
-  timer=Timer(Duration(seconds: 1), _getNext);
-}
+  _getNext() {
+    _appPreferences.isUserLoggedIn().then((isUserLoggedIn) => {
+          if (isUserLoggedIn)
+            {Navigator.pushReplacementNamed(context, Routes.mainRoute)}
+          else
+            {
+              _appPreferences
+                  .isOnBoardingScreenViewed()
+                  .then((isOnBoardingScreenViewed) => {
+                        if (isOnBoardingScreenViewed)
+                          {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.loginRoute)
+                          }
+                        else
+                          {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.onBoardingRoute)
+                          }
+                      })
+            }
+        });
+    Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+  }
 
-_getNext(){
-
-  Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
-}
-@override
+  @override
   void initState() {
-  _startDelay();
+    _startDelay();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: ColorManager.primary,
-body:Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
-
+      backgroundColor: ColorManager.primary,
+      body: Center(child: Image(image: AssetImage(ImageAssets.splashLogo))),
     );
-  
   }
-@override
+
+  @override
   void dispose() {
-   timer?.cancel();
+    timer?.cancel();
     super.dispose();
   }
-
 }

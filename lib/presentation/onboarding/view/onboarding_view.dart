@@ -1,3 +1,5 @@
+import 'package:advanced_flutter/app/app_prefs.dart';
+import 'package:advanced_flutter/app/di.dart';
 import 'package:advanced_flutter/domain/models/models.dart';
 import 'package:advanced_flutter/presentation/onboarding/viewmodel/onboarding_viewmodel.dart';
 import 'package:advanced_flutter/presentation/resources/assets_manager.dart';
@@ -20,9 +22,10 @@ class OnBordingView extends StatefulWidget {
 class _OnBordingViewState extends State<OnBordingView> {
   final PageController pageController = PageController();
   OnBoardingViewModel viewModel = OnBoardingViewModel();
-
+final AppPreferences _appPreferences = instance<AppPreferences>();
   _bind() {
     viewModel.start();
+    _appPreferences.setOnBoardingScreenViewed();
   }
 
   @override

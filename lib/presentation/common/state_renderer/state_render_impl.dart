@@ -48,9 +48,7 @@ class ContentState extends FlowState {
   StateRendererType getStateRendererType() =>
       StateRendererType.CONTENT_SCREEN_STATE;
 }
-
 // EMPTY STATE
-
 class EmptyState extends FlowState {
   String message;
 
@@ -65,9 +63,7 @@ class EmptyState extends FlowState {
 }
 
 extension FlowStateExtension on FlowState {
-  Widget getScreenWidget(
-    
-    BuildContext context, Widget contentScreenWidget,
+  Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
       Function retryActionFunction) {
     switch (runtimeType) {
       case LoadingState:
@@ -85,7 +81,7 @@ extension FlowStateExtension on FlowState {
         }
       case ErrorState:
         {
-   if (getStateRendererType() == StateRendererType.POPUP_ERROR_STATE ) {
+          if (getStateRendererType() == StateRendererType.POPUP_ERROR_STATE) {
             showPopUp(context, getStateRendererType(), getMessage());
             return contentScreenWidget;
           } else {
@@ -98,7 +94,7 @@ extension FlowStateExtension on FlowState {
         }
       case ContentState:
         {
-                    dismissDialog(context);
+          dismissDialog(context);
 
           return contentScreenWidget;
         }
@@ -119,13 +115,16 @@ extension FlowStateExtension on FlowState {
     }
   }
 }
-_isThereCurrentDialogShowing(BuildContext context){
-ModalRoute.of(context)?.isCurrent!=true;
+
+_isThereCurrentDialogShowing(BuildContext context) {
+  ModalRoute.of(context)?.isCurrent != true;
 }
-dismissDialog(BuildContext context){
-  if(_isThereCurrentDialogShowing(context)){
-Navigator.of(context,rootNavigator: true).pop(true);
-}}
+
+dismissDialog(BuildContext context) {
+  if (_isThereCurrentDialogShowing(context)) {
+    Navigator.of(context, rootNavigator: true).pop(true);
+  }
+}
 
 showPopUp(
     BuildContext context, StateRendererType stateRendererType, String message) {

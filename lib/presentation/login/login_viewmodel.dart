@@ -1,4 +1,6 @@
- import 'dart:async';
+import 'dart:async';
+import 'package:advanced_flutter/app/app_prefs.dart';
+import 'package:advanced_flutter/app/di.dart';
 import 'package:advanced_flutter/data/network/failure.dart';
 import 'package:advanced_flutter/domain/usecase/login_usecase.dart';
 import 'package:advanced_flutter/presentation/base/baseviewmodel.dart';
@@ -14,8 +16,9 @@ class LoginViewModel
       StreamController<String>.broadcast();
   StreamController _areAllInputsValidStreamController =
       StreamController<void>.broadcast();
-  var loginObject = LoginObject("", "");
 
+  StreamController isUserLoggedInSuccessfullyStreamController=StreamController();    
+  var loginObject = LoginObject("", "");
   LoginUseCase _loginUseCase; 
   LoginViewModel(this._loginUseCase);
   @override
@@ -24,6 +27,7 @@ class LoginViewModel
     _passwordstreamController.close();
     _userNamestreamController.close();
     _areAllInputsValidStreamController.close();
+    isUserLoggedInSuccessfullyStreamController.close();
   }
 
   @override
@@ -45,7 +49,9 @@ class LoginViewModel
             LoginUseCaseInput(loginObject.userName, loginObject.password)))
         .fold((failure) => {
           inputState.add(ErrorState(stateRendererType: StateRendererType.POPUP_ERROR_STATE, message: failure.message)),
-          print(failure.message)}, (data) {
+          print(failure.message)}, 
+          (data) {
+            isUserLoggedInSuccessfullyStreamController.add( true);
             inputState.add(ContentState);
       print(data.customer!.name);
     }); 
