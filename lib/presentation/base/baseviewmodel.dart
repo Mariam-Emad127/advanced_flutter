@@ -1,7 +1,4 @@
-//abstract class BaseViewModel extends BaseViewModelInputs with BaseViewModelOutputs {
-
-import 'dart:async';
-
+ import 'dart:async';
 import 'package:advanced_flutter/presentation/common/state_renderer/state_render_impl.dart';
 
 abstract class BaseViewModel extends BaseViewModelInputs implements BaseViewModelOutputs{
@@ -14,7 +11,6 @@ final StreamController _inputStateStreamController=StreamController<FlowState>.b
 @override
   void dispose() {
    _inputStateStreamController.close();
-   // super.dispose();
   }
 
 }
@@ -27,8 +23,6 @@ void dispose();
   Sink get inputState;
 }
 
-
-abstract class BaseViewModelOutputs {
- 
+abstract class BaseViewModelOutputs { 
 Stream <FlowState>get outputState;
 }

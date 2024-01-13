@@ -1,5 +1,6 @@
 import 'package:advanced_flutter/app/di.dart';
-import 'package:advanced_flutter/presentation/forget_password/forget_password_view.dart';
+import 'package:advanced_flutter/presentation/forgot_password/forget_password_view.dart';
+//import 'package:advanced_flutter/presentation/forget_password/forget_password_view.dart';
 import 'package:advanced_flutter/presentation/login/login_view.dart';
 import 'package:advanced_flutter/presentation/main/main_view.dart';
 import 'package:advanced_flutter/presentation/onboarding/view/onboarding_view.dart';
@@ -24,9 +25,10 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
-
+       
       case Routes.forgotPasswordRoute:
-        return MaterialPageRoute(builder: (_) => const ForgetPassword());
+      initForgotPasswordModule();
+        return MaterialPageRoute(builder: (_) => const ForgotPassword());
 
       case Routes.loginRoute:
         initLoginModule();

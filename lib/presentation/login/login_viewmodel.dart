@@ -16,7 +16,6 @@ class LoginViewModel
       StreamController<String>.broadcast();
   StreamController _areAllInputsValidStreamController =
       StreamController<void>.broadcast();
-
   StreamController isUserLoggedInSuccessfullyStreamController=StreamController();    
   var loginObject = LoginObject("", "");
   LoginUseCase _loginUseCase; 

@@ -62,6 +62,18 @@ class EmptyState extends FlowState {
       StateRendererType.EMPTY_SCREEN_STATE;
 }
 
+class SuccessState extends FlowState {
+  String message;
+
+  SuccessState(this.message);
+
+  @override
+  String getMessage() => message;
+
+  @override
+  StateRendererType getStateRendererType() => StateRendererType.POPUP_SUCCESS;
+}
+
 extension FlowStateExtension on FlowState {
   Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
       Function retryActionFunction) {

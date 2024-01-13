@@ -54,8 +54,7 @@ _appPreferences.setIsUserLoggedIn();
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorManager.white,
-        //_getContentWidget(),
-        body: StreamBuilder<FlowState>(
+         body: StreamBuilder<FlowState>(
             stream: loginViewModel.outputState,
             builder: (context, snapshot) {
               return snapshot.data
@@ -148,9 +147,9 @@ _appPreferences.setIsUserLoggedIn();
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, Routes.forgotPasswordRoute);
+                                context, Routes.forgotPasswordRoute   );
                           },
-                          child: Text(AppStrings.forgetPassword,
+                          child: Text(AppStrings.forgtPassword,
                               style: Theme.of(context).textTheme.titleMedium),
                         ),
                         TextButton(
