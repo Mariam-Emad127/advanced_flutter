@@ -119,6 +119,17 @@ extension FlowStateExtension on FlowState {
             stateRendererType: getStateRendererType(),
           );
         }
+        case SuccessState:{
+
+dismissDialog(context);
+          return StateRenderer(
+            message: getMessage(),
+            retryActionFunction: () {},
+            stateRendererType: getStateRendererType(),
+          );
+
+
+        }
 
       default:
         {

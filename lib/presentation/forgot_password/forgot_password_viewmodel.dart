@@ -17,8 +17,7 @@ class ForgotPasswordViewModel extends BaseViewModel  implements ForgotPasswordVi
   final ForgotPasswordUseCase _forgotPasswordUseCase;
 
   ForgotPasswordViewModel(this._forgotPasswordUseCase);
-
-  var email = "";
+   var email = "";
 
   // input
   @override
@@ -31,8 +30,8 @@ class ForgotPasswordViewModel extends BaseViewModel  implements ForgotPasswordVi
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _forgotPasswordUseCase.excute(email)).fold((failure) {
-      inputState.add(
-          ErrorState(stateRendererType: StateRendererType.POPUP_ERROR_STATE,message: failure.message));
+    //  print(failure.message);
+      //inputState.add(  ErrorState(stateRendererType: StateRendererType.POPUP_ERROR_STATE,message: failure.message));
     }, (supportMessage) {
       inputState.add(SuccessState(supportMessage));
     });

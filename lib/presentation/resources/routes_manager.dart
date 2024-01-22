@@ -36,6 +36,7 @@ class RouteGenerator {
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBordingView());
       case Routes.registerRoute:
+      initRegisterModule();
         return MaterialPageRoute(builder: (_) => const RegisterView());
 
       case Routes.mainRoute:

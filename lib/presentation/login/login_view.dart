@@ -32,13 +32,13 @@ class _LoginViewState extends State<LoginView> {
     _passwordController.addListener(() {
       loginViewModel.setPassword(_passwordController.text);
 
-      loginViewModel.isUserLoggedInSuccessfullyStreamController.stream
-          .listen((isLogIn) {
+      loginViewModel.isUserLoggedInSuccessfullyStreamController.stream.listen((isLogIn) {
         if (isLogIn == true) {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-_appPreferences.setIsUserLoggedIn();
+      //    SchedulerBinding.instance.addPostFrameCallback((_) {
+//_appPreferences.setIsUserLoggedIn();
             Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
-          });
+//          }
+  //        );
         }
       });
     });

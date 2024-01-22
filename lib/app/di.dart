@@ -7,16 +7,16 @@ import 'package:advanced_flutter/data/repository/repositoryImpl.dart';
 import 'package:advanced_flutter/domain/repository/repository.dart';
 import 'package:advanced_flutter/domain/usecase/forgot_password_usecase.dart';
 import 'package:advanced_flutter/domain/usecase/login_usecase.dart';
+import 'package:advanced_flutter/domain/usecase/register_usecase.dart';
 import 'package:advanced_flutter/presentation/forgot_password/forgot_password_viewmodel.dart';
 import 'package:advanced_flutter/presentation/login/login_viewmodel.dart';
+import 'package:advanced_flutter/presentation/register/register_viewmodel.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:dio/dio.dart';
+  
  
- 
-
-
 final instance = GetIt.instance;
 
 Future<void> initAppModule() async {
@@ -70,6 +70,21 @@ initLoginModule() {
     instance.registerFactory<LoginViewModel>(() => LoginViewModel(instance()));
   }
 }
+
+
+initRegisterModule() {
+  if (!GetIt.I.isRegistered<RegisterUseCase>()) {
+    instance.registerFactory<RegisterUseCase>(
+        () => RegisterUseCase(instance()));
+    instance.registerFactory<RegisterViewModel>(
+        () => RegisterViewModel(instance()));
+  
+    instance.registerFactory<ImagePicker>(
+        () => ImagePicker());
+  }
+}
+
+
 
 resetModules() {
   instance.reset(dispose: false);

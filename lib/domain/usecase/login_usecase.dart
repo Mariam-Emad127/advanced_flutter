@@ -8,9 +8,10 @@ import 'package:dartz/dartz.dart';
 class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
   final Repository _repository;
   LoginUseCase(this._repository);
- 
+
   @override
-  Future<Either<Failure, Authentication>> excute(LoginUseCaseInput input  ) async {
+  Future<Either<Failure, Authentication>> excute(
+      LoginUseCaseInput input) async {
     return await _repository.login(LoginRequest(input.email, input.password));
   }
 }
