@@ -81,8 +81,29 @@ return left(ErrorHandler.handle(error).failure);
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+  
+  @override
+  Future<Either<Failure, HomeObject>> getHomeData()async {
+ if(await networkInfo.isConnected){
+try{
+final response=await remoteDataSource.getHomeData();
+if(response.status==ApiInternalStatus.SUCCESS){
+  return Right( response.toDomain());
+
+}else{
+return Left(Failure(response.status??ResponseCode.DEFAULT, response.message??ResponseMessage.DEFAULT));
+
+}}catch(error){
+  return left(ErrorHandler.handle(error).failure);
+}}else{
+return left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+
+}}
+
+ }
+  
 
 
   
-  }
+  
   

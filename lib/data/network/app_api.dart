@@ -20,7 +20,7 @@ Future<AuthenticationResponse>login(
 
 @POST( "/customers/forgotPassword")
 Future <ForgotPasswordResponse>forgotPassword(@Field("email")String email);
-
+ 
    @POST("/customers/register")
   Future<AuthenticationResponse> register(
     @Field("country_mobile_code") String countryMobileCode,
@@ -32,8 +32,8 @@ Future <ForgotPasswordResponse>forgotPassword(@Field("email")String email);
   );
 
 
-
-
+@GET("/home")
+Future<HomeResponse>getHomeData();
 
 
 }
