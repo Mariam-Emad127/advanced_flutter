@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   build_runner: ^2.4.7
+  carousel_slider: ^4.2.1
   country_code_picker: ^3.0.0
   cupertino_icons: ^1.0.2
   flutter:
@@ -39,6 +40,7 @@ dependencies:
   injectable_generator: ^2.4.1
   lottie: ^2.7.0
   retrofit: ^4.0.3
+  rxdart: ^0.27.7
 
 dev_dependencies:
   analyzer: ^6.0.0

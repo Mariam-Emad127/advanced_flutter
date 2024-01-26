@@ -39,6 +39,8 @@ static const noRouteFound = "noRouteFound";
   static const settings = "settings";
   static const services = "services";
   static const stores = "stores";
+  static const section = "section";
+
   static const String details = "details";
   static const String about = "about";
   static const String storeDetails = "store_details";
