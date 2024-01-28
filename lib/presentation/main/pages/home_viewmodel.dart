@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ffi';
-
 import 'package:advanced_flutter/domain/models/models.dart';
 import 'package:advanced_flutter/domain/usecase/home_usecase.dart';
 import 'package:advanced_flutter/presentation/base/baseviewmodel.dart';
@@ -10,10 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeViewModel extends BaseViewModel implements HomeViewModelInputs,HomeViewModelOutputs{
-final StreamController _bannerStreamController =BehaviorSubject<List<BannerAd>> ();
+/* final StreamController _bannerStreamController =BehaviorSubject<List<BannerAd>> ();
 final StreamController _storeStreamController =BehaviorSubject<List<Store>>();
-
-final StreamController _servicesStreamController =BehaviorSubject<List<Service>>();
+final StreamController _servicesStreamController =BehaviorSubject<List<Service>>(); */
   final _dataStreamController = BehaviorSubject<HomeViewObject>();
 
 final HomeUseCase _homeUseCase;
@@ -26,12 +24,12 @@ HomeViewModel(this._homeUseCase);
 
   @override
   void dispose() {
-_bannerStreamController.close();
+/* _bannerStreamController.close();
 _servicesStreamController.close();
-_storeStreamController.close();
+_storeStreamController.close(); */
     super.dispose();
   }
-  
+ /*  
   @override
   // TODO: implement inputBabber
   Sink get inputBabber => _bannerStreamController.sink;
@@ -54,7 +52,7 @@ _storeStreamController.close();
   @override
   // TODO: implement outputStore
   Stream<List<Store>> get outputStore => _storeStreamController.stream.map((store) => store);
-
+ */
 _getHomeData()async {
     inputState.add(
         LoadingState(stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE));
@@ -94,18 +92,17 @@ inputStore.add(homeObject.data.stores); */
 }
 
 abstract class HomeViewModelInputs {
-  //Sink get inputHomeData;
-  Sink get inputStore;
+ /*   Sink get inputStore;
   Sink get inputService;
-  Sink get inputBabber;
+  Sink get inputBabber ;*/
     Sink get inputHomeData;
 
 }
 
 abstract class HomeViewModelOutputs {
-  Stream<List<Store>> get outputStore;
+/*   Stream<List<Store>> get outputStore;
   Stream<List<Service>> get outputService;
-  Stream<List<BannerAd>> get outputBannerAd;
+  Stream<List<BannerAd>> get outputBannerAd; */
     Stream<HomeViewObject> get outputHomeData;
 
 }

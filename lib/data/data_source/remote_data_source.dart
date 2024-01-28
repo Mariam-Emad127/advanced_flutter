@@ -7,7 +7,7 @@ Future<AuthenticationResponse>login(LoginRequest loginRequest);
  Future<ForgotPasswordResponse>forgotPassword(String email);
  Future<AuthenticationResponse>register(RegisterRequest registerRequest);
  Future<HomeResponse>getHomeData() ;
-
+Future<StoreDetailsResponse> getStoreDetails();
 }
 
 
@@ -48,11 +48,12 @@ return await _appServiceClient.register(
  return await _appServiceClient.getHomeData();
     
   }
+ 
+ 
 
 
-
-
-
-
-}
+  @override
+  Future<StoreDetailsResponse> getStoreDetails()async {
+ return await _appServiceClient.getStoreDetails();
+  }}
 

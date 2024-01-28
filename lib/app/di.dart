@@ -1,4 +1,5 @@
 import 'package:advanced_flutter/app/app_prefs.dart';
+import 'package:advanced_flutter/data/data_source/local_data_source.dart';
 import 'package:advanced_flutter/data/data_source/remote_data_source.dart';
 import 'package:advanced_flutter/data/network/app_api.dart';
 import 'package:advanced_flutter/data/network/dio_factory.dart';
@@ -9,10 +10,12 @@ import 'package:advanced_flutter/domain/usecase/forgot_password_usecase.dart';
 import 'package:advanced_flutter/domain/usecase/home_usecase.dart';
 import 'package:advanced_flutter/domain/usecase/login_usecase.dart';
 import 'package:advanced_flutter/domain/usecase/register_usecase.dart';
+import 'package:advanced_flutter/domain/usecase/store_details_usecase.dart';
 import 'package:advanced_flutter/presentation/forgot_password/forgot_password_viewmodel.dart';
 import 'package:advanced_flutter/presentation/login/login_viewmodel.dart';
 import 'package:advanced_flutter/presentation/main/pages/home_viewmodel.dart';
 import 'package:advanced_flutter/presentation/register/register_viewmodel.dart';
+import 'package:advanced_flutter/presentation/store_details/store_detailsViewModel.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,13 +49,13 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<RemoteDataSource>(
       () =>   RemoteDataSourceImpl(instance()));
 
-  // local data source
-  //instance.registerLazySingleton<LocalDataSource>(
-    //  () => LocalDataSourceImplementer());
+   //local data source
+  instance.registerLazySingleton<LocalDataSource>(
+     () => LocalDataSourceImplementer());
 
   // repository
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance() ));
+      () => RepositoryImpl(instance(), instance(),instance() ));
 }
  
 
@@ -94,6 +97,12 @@ initHomeModule() {
   }
 }
 
+initStoreModule() {
+  if (!GetIt.I.isRegistered<StoreDetailsUseCase>()) {
+    instance.registerFactory<StoreDetailsUseCase>(() => StoreDetailsUseCase(instance()));
+    instance.registerFactory<StoreDetailsViewModel>(() => StoreDetailsViewModel(instance()));
+  }
+}
 
 
 resetModules() {
@@ -103,5 +112,5 @@ resetModules() {
   initLoginModule();
   //initRegisterModule();
   initForgotPasswordModule();
-  //initStoreDetailsModule();
+ initStoreModule();
 }

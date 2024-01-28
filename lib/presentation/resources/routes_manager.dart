@@ -42,9 +42,12 @@ class RouteGenerator {
       case Routes.mainRoute:
       initHomeModule();
         return MaterialPageRoute(builder: (_) => const MainView());
-      case Routes.storeDetailsRoute:
       
+      
+      case Routes.storeDetailsRoute:
+      initStoreModule();
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
+      
       default:
         return unDefinedRoute();
     }

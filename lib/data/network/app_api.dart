@@ -7,6 +7,8 @@ import 'package:retrofit/http.dart';
 
 part 'app_api.g.dart';
 @RestApi(baseUrl:"https://5zky3.wiremockapi.cloud/")
+//mocklab.io")
+//wiremockapi.cloud/")
  //@RestApi(baseUrl: Constant.baseUrl)
 abstract class AppServiceClient {
 factory AppServiceClient(Dio dio,{String baseUrl})=_AppServiceClient; 
@@ -36,4 +38,6 @@ Future <ForgotPasswordResponse>forgotPassword(@Field("email")String email);
 Future<HomeResponse>getHomeData();
 
 
+@GET( "/storeDetails/1")
+Future <StoreDetailsResponse>getStoreDetails();
 }

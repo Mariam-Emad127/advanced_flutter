@@ -1,3 +1,4 @@
+import 'package:advanced_flutter/data/data_source/local_data_source.dart';
 import 'package:advanced_flutter/data/data_source/remote_data_source.dart';
 import 'package:advanced_flutter/data/mapper/mapper.dart';
 import 'package:advanced_flutter/data/network/error_handler.dart';
@@ -11,7 +12,8 @@ import 'package:dartz/dartz.dart';
   class RepositoryImpl implements Repository  {
   RemoteDataSource remoteDataSource;
   NetworkInfo networkInfo;
-  RepositoryImpl(this.remoteDataSource, this.networkInfo);
+  LocalDataSource localDataSource;
+  RepositoryImpl(this.remoteDataSource, this.networkInfo,this.localDataSource);
 
   
   @override
@@ -84,10 +86,25 @@ return left(ErrorHandler.handle(error).failure);
   
   @override
   Future<Either<Failure, HomeObject>> getHomeData()async {
+try{
+final response=await localDataSource.getHomeData();
+return Right(response.toDomain() );
+
+
+}catch(error){
+
+
+
+
+
+
+
  if(await networkInfo.isConnected){
 try{
 final response=await remoteDataSource.getHomeData();
 if(response.status==ApiInternalStatus.SUCCESS){
+
+  localDataSource.saveHomeToCache(response);
   return Right( response.toDomain());
 
 }else{
@@ -99,8 +116,37 @@ return Left(Failure(response.status??ResponseCode.DEFAULT, response.message??Res
 return left(DataSource.NO_INTERNET_CONNECTION.getFailure());
 
 }}
+  }
+  
+  @override
+  Future<Either<Failure, StoreDetails>> getStoreDetails()async {
+try{
+final response=await localDataSource.getStoreDetails  ();
+return Right(response.toDomain() );
+
+
+}catch(error){
+
+ if(await networkInfo.isConnected){
+try{
+final response=await remoteDataSource.getStoreDetails();
+if(response.status==ApiInternalStatus.SUCCESS){
+
+  return Right(response.toDomain());
+}else{
+  return left(Failure(response.status??ResponseCode.DEFAULT, response.message??ResponseMessage.DEFAULT));
+}
+
+}catch(error){
+
+    return left(ErrorHandler.handle(error).failure);
+}}else{
+return left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+}
 
  }
+  }}
+ 
   
 
 

@@ -106,13 +106,13 @@ extension FlowStateExtension on FlowState {
         }
       case ContentState:
         {
-          dismissDialog(context);
+        //  dismissDialog(context);
 
           return contentScreenWidget;
         }
       case EmptyState:
         {
-          dismissDialog(context);
+          //dismissDialog(context);
           return StateRenderer(
             message: getMessage(),
             retryActionFunction: () {},
@@ -121,7 +121,7 @@ extension FlowStateExtension on FlowState {
         }
         case SuccessState:{
 
-dismissDialog(context);
+     //dismissDialog(context);
           return StateRenderer(
             message: getMessage(),
             retryActionFunction: () {},
@@ -143,12 +143,17 @@ _isThereCurrentDialogShowing(BuildContext context) {
   ModalRoute.of(context)?.isCurrent != true;
 }
 
-dismissDialog(BuildContext context) {
+/* dismissDialog(BuildContext context) {
   if (_isThereCurrentDialogShowing(context)) {
     Navigator.of(context, rootNavigator: true).pop(true);
   }
 }
-
+ */
+/* dismissDialog(BuildContext context) {
+  if (context != null && _isThereCurrentDialogShowing(context)) {
+    Navigator.of(context, rootNavigator: true).pop(true);
+  }
+} */
 showPopUp(
     BuildContext context, StateRendererType stateRendererType, String message) {
   WidgetsBinding.instance?.addPostFrameCallback((_) {

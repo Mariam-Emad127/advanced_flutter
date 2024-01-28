@@ -36,25 +36,33 @@ class _HomePageState extends State<HomePage> {
           child: StreamBuilder<FlowState>(
               stream: _homeViewModel.outputState,
               builder: (context, snapshot) {
-                return snapshot.data
-                        ?.getScreenWidget(context, _getContentWidgets(), () {
-                      _homeViewModel.start();
-                    }) ??
-                    _getContentWidgets();
+                return
+                    
+                    snapshot.data?.getScreenWidget(
+                            context, _getContentWidgets(), () {
+                          _homeViewModel.start();
+                        }) ??
+                        _getContentWidgets();
+
+           
               })),
     );
   }
 
   Widget _getContentWidgets() {
-    
-    return Column(
-      children: [
-        _getSection(AppStrings.section),
-        _getBanner(),
-        _getServise(),
-        _getStore()
-      ],
-    );
+    return StreamBuilder<HomeViewObject>(
+        stream: _homeViewModel.outputHomeData,
+        builder: (context, snapshot) {
+          return Column(
+            children: [
+              _getBannerWidget(snapshot.data?.banners),
+              _getSection(AppStrings.section),
+              _getServiceWidget(snapshot.data?.services),
+              _getSection(AppStrings.services),
+              _getStoreWidget(snapshot.data?.stores)
+            ],
+          );
+        });
   }
 
   Widget _getSection(String title) {
@@ -70,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _getBanner() {
+/*   Widget _getBanner() {
     return StreamBuilder<List<BannerAd>>(
       stream: _homeViewModel.outputBannerAd,
       builder: (context, snapshot) {
@@ -78,7 +86,7 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-
+ */
   Widget _getBannerWidget(List<BannerAd>? banners) {
     if (banners != null) {
       return CarouselSlider(
@@ -112,14 +120,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget _getServise() {
+/*   Widget _getServise() {
     return StreamBuilder<List<Service>>(
       stream: _homeViewModel.outputService,
       builder: (context, snapshot) {
         return _getServiceWidget(snapshot.data);
       },
     );
-  }
+  } */
 
   Widget _getServiceWidget(List<Service>? services) {
     if (services != null) {
@@ -159,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 service.title,
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyMedium ,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
                           )
@@ -175,58 +183,56 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
- Widget _getStore() {
+/*  Widget _getStore() {
     return StreamBuilder<List<  Store>>(
       stream: _homeViewModel.outputStore ,
       builder: (context, snapshot) {
         return _getStoreWidget(snapshot.data);
       },
     );
-  }
+  } */
 
-  Widget _getStoreWidget(List<Store> ?stores) {
-
- if (stores != null) {
+  Widget _getStoreWidget(List<Store>? stores) {
+    if (stores != null) {
       return Padding(
         padding: EdgeInsets.only(
           left: AppPadding.p12,
           right: AppPadding.p12,
           top: AppPadding.p12,
         ),
-        child: Flex(direction: Axis.vertical,
-        
-        children: [
-          
-          GridView.count(
-          crossAxisCount: AppSize.s2,
-        mainAxisSpacing: AppSize.s8,
-        crossAxisSpacing: AppSize.s8,
-        physics: ScrollPhysics(),
-        shrinkWrap: true,children: List.generate(stores.length, (index) => InkWell(
-onTap: (){
-  Navigator.of(context).pushNamed(Routes.storeDetailsRoute );
-},
-child: Card( elevation: AppSize.s4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppSize.s12),
-                        side: BorderSide(
-                            color: ColorManager.primary, width: AppSize.s1),
-                      ),
-                      child: Image.network(stores[index].image),
-                      
-                      ),
-
-        )),
-        )
-        
-        ],
-        
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            GridView.count(
+              crossAxisCount: AppSize.s2,
+              mainAxisSpacing: AppSize.s8,
+              crossAxisSpacing: AppSize.s8,
+              physics: ScrollPhysics(),
+              shrinkWrap: true,
+              children: List.generate(
+                  stores.length,
+                  (index) => InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.storeDetailsRoute);
+                        },
+                        child: Card(
+                          elevation: AppSize.s4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppSize.s12),
+                            side: BorderSide(
+                                color: ColorManager.primary, width: AppSize.s1),
+                          ),
+                          child: Image.network(stores[index].image),
+                        ),
+                      )),
+            )
+          ],
         ),
-        
-        );
- }else{return Container();}
-
-
+      );
+    } else {
+      return Container();
+    }
   }
 
   @override
@@ -235,3 +241,7 @@ child: Card( elevation: AppSize.s4,
     super.dispose();
   }
 }
+
+
+ 
+ 
