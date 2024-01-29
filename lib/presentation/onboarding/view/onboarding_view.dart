@@ -8,6 +8,7 @@ import 'package:advanced_flutter/presentation/resources/constants_manager.dart';
 import 'package:advanced_flutter/presentation/resources/routes_manager.dart';
 import 'package:advanced_flutter/presentation/resources/strings_manager.dart';
 import 'package:advanced_flutter/presentation/resources/values_manger.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -81,7 +82,7 @@ final AppPreferences _appPreferences = instance<AppPreferences>();
                     AppStrings.skip,
                     style: Theme.of(context).textTheme.titleMedium,
                     textAlign: TextAlign.end,
-                  ),
+                  ).tr(),
                 ),
               ),
 
@@ -193,7 +194,7 @@ class OnBoardingPage extends StatelessWidget {
           _sliderObject.title,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.displayLarge,
-        ),
+        ).tr(),
       ),
       Padding(
         padding: const EdgeInsets.all(AppPadding.p8),
@@ -201,7 +202,7 @@ class OnBoardingPage extends StatelessWidget {
           _sliderObject.subTitle,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineMedium,
-        ),
+        ).tr(),
       ),
       const SizedBox(height: AppSize.s60),
       SvgPicture.asset(_sliderObject.image)

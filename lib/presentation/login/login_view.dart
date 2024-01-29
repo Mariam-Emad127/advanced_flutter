@@ -8,6 +8,7 @@ import 'package:advanced_flutter/presentation/resources/color_manager.dart';
 import 'package:advanced_flutter/presentation/resources/routes_manager.dart';
 import 'package:advanced_flutter/presentation/resources/strings_manager.dart';
 import 'package:advanced_flutter/presentation/resources/values_manger.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -86,11 +87,11 @@ class _LoginViewState extends State<LoginView> {
                           keyboardType: TextInputType.emailAddress,
                           controller: _userNameController,
                           decoration: InputDecoration(
-                              hintText: AppStrings.username,
-                              labelText: AppStrings.username,
+                              hintText: AppStrings.username.tr(),
+                              labelText: AppStrings.username.tr(),
                               errorText: (snapshot.data ?? true)
                                   ? null
-                                  : AppStrings.usernameError),
+                                  : AppStrings.usernameError.tr()),
                         );
                       },
                     ),
@@ -106,11 +107,11 @@ class _LoginViewState extends State<LoginView> {
                           keyboardType: TextInputType.visiblePassword,
                           controller: _passwordController,
                           decoration: InputDecoration(
-                              hintText: AppStrings.password,
-                              labelText: AppStrings.password,
+                              hintText: AppStrings.password.tr(),
+                              labelText: AppStrings.password.tr(),
                               errorText: (snapshot.data ?? true)
                                   ? null
-                                  : AppStrings.passwordError),
+                                  : AppStrings.passwordError.tr()),
                         );
                       },
                     ),
@@ -131,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                                         loginViewModel.login();
                                       }
                                     : null,
-                                child: Text(AppStrings.login)),
+                                child: Text(AppStrings.login).tr()),
                           );
                         },
                       )),
@@ -149,14 +150,14 @@ class _LoginViewState extends State<LoginView> {
                             Navigator.pushNamed(
                                 context, Routes.forgotPasswordRoute   );
                           },
-                          child: Text(AppStrings.forgtPassword,
+                          child: Text(AppStrings.forgtPassword.tr(),
                               style: Theme.of(context).textTheme.titleMedium),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.registerRoute);
                           },
-                          child: Text(AppStrings.registerText,
+                          child: Text(AppStrings.registerText.tr(),
                               style: Theme.of(context).textTheme.titleMedium),
                         )
                       ],

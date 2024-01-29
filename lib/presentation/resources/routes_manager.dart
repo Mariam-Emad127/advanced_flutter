@@ -8,6 +8,7 @@ import 'package:advanced_flutter/presentation/register/register_view.dart';
 import 'package:advanced_flutter/presentation/resources/strings_manager.dart';
 import 'package:advanced_flutter/presentation/splash/splash_view.dart';
 import 'package:advanced_flutter/presentation/store_details/store_details_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -58,7 +59,7 @@ Route<dynamic> unDefinedRoute() {
   return MaterialPageRoute(
       builder: (_) => Scaffold(
           appBar: AppBar(
-            title: Text(AppStrings.noRouteFound),
+            title: Text(AppStrings.noRouteFound).tr(),
           ),
-          body: Center(child: Text(AppStrings.noRouteFound))));
+          body: Center(child: Text(AppStrings.noRouteFound).tr())));
 }

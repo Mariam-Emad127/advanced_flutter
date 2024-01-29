@@ -32,8 +32,10 @@ dependencies:
   carousel_slider: ^4.2.1
   country_code_picker: ^3.0.0
   cupertino_icons: ^1.0.2
+  easy_localization: ^3.0.3
   flutter:
     sdk: flutter
+  flutter_phoenix: ^1.1.1
   freezed: ^2.4.6
   get_it: ^7.6.4
   image_picker: ^1.0.7

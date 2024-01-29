@@ -5,6 +5,7 @@ import 'package:advanced_flutter/presentation/resources/color_manager.dart';
 import 'package:advanced_flutter/presentation/resources/strings_manager.dart';
 import 'package:advanced_flutter/presentation/resources/values_manger.dart';
 import 'package:advanced_flutter/presentation/store_details/store_detailsViewModel.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
  
@@ -50,7 +51,7 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
     return Scaffold(
         backgroundColor: ColorManager.white,
         appBar: AppBar(
-          title: Text(AppStrings.storeDetails),
+          title: Text(AppStrings.storeDetails).tr(),
           elevation: AppSize.s0,
           iconTheme: IconThemeData(
             //back button
@@ -85,11 +86,11 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
             width: double.infinity,
             height: 250,
           )),
-          _getSection(AppStrings.details),
+          _getSection(AppStrings.details.tr()),
           _getInfoText(storeDetails.details),
           _getSection(AppStrings.services),
           _getInfoText(storeDetails.services),
-          _getSection(AppStrings.about),
+          _getSection(AppStrings.about.tr()),
           _getInfoText(storeDetails.about)
         ],
       );
@@ -111,7 +112,7 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
   Widget _getInfoText(String info) {
     return Padding(
       padding: const EdgeInsets.all(AppSize.s12),
-      child: Text(info, style: Theme.of(context).textTheme.bodyText2),
+      child: Text(info, style: Theme.of(context).textTheme.bodyText2).tr(),
     );
   }
 
