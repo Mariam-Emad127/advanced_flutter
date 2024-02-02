@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
           return Column(
             children: [
               _getBannerWidget(snapshot.data?.banners),
-              _getSection(AppStrings.section.tr()),
+              _getSection(AppStrings.services.tr()),
               _getServiceWidget(snapshot.data?.services),
               _getSection(AppStrings.services.tr()),
               _getStoreWidget(snapshot.data?.stores)

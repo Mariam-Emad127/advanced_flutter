@@ -28,12 +28,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return   MaterialApp(
+
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+      //localizationsDelegates: context.localizationDelegates,
+      //supportedLocales: context.supportedLocales,
+      //locale: context.locale,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: RouteGenerator.getRoute,
-      //onGenerateInitialRoutes: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,
       theme: getApplicationTheme(),
     

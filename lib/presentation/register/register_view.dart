@@ -1,8 +1,6 @@
  import 'dart:io';
-
 import 'package:advanced_flutter/app/app_prefs.dart';
-import 'package:advanced_flutter/app/constants.dart';
-import 'package:advanced_flutter/app/di.dart';
+ import 'package:advanced_flutter/app/di.dart';
 import 'package:advanced_flutter/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:advanced_flutter/presentation/register/register_viewmodel.dart';
 import 'package:advanced_flutter/presentation/resources/assets_manager.dart';
@@ -248,7 +246,7 @@ class _RegisterViewState extends State<RegisterView> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(AppStrings.alreadyHaveAccount.tr(),
+                    child: Text(AppStrings.haveAccount.tr(),
                         style: Theme.of(context).textTheme.subtitle2) ,
                   ),
                 )
@@ -296,7 +294,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ListTile(
                   trailing: Icon(Icons.arrow_forward),
                   leading: Icon(Icons.camera),
-                  title: Text(AppStrings.photoGallery).tr() ,
+                  title: Text(AppStrings.photoGalley).tr() ,
                   onTap: () {
                     _imageFormGallery();
                     Navigator.of(context).pop();

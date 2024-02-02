@@ -23,12 +23,12 @@ class _MainViewState extends State<MainView> {
     SettingsPage()
   ];
    List<String> titles = [
-    AppStrings.home.tr(),
+    AppStrings.Home.tr(),
     AppStrings.search.tr(),
     AppStrings.notifications.tr(),
     AppStrings.settings.tr(),
   ];
-   var _title = AppStrings.home.tr();
+   var _title = AppStrings.Home.tr();
   var _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ bottomNavigationBar: Container(
           onTap:onTap ,
     items: [
   BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: AppStrings.home.tr()),
+                icon: Icon(Icons.home), label: AppStrings.Home.tr()),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search), label: AppStrings.search.tr()),
             BottomNavigationBarItem(

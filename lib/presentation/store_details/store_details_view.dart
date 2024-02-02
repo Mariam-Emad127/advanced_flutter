@@ -88,8 +88,8 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
           )),
           _getSection(AppStrings.details.tr()),
           _getInfoText(storeDetails.details),
-          _getSection(AppStrings.services),
-          _getInfoText(storeDetails.services),
+          _getSection(AppStrings.services.tr()),
+          _getInfoText(storeDetails.services.tr()),
           _getSection(AppStrings.about.tr()),
           _getInfoText(storeDetails.about)
         ],
