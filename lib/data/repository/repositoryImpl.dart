@@ -92,13 +92,6 @@ return Right(response.toDomain() );
 
 
 }catch(error){
-
-
-
-
-
-
-
  if(await networkInfo.isConnected){
 try{
 final response=await remoteDataSource.getHomeData();
